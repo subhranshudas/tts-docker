@@ -1,4 +1,10 @@
 # Secrets (DO NOT COMMIT)
 .secrets/
 
+# Local input files (do not commit)
+input/
+
+# Local output files (do not commit)
+output/
+
 .DS_Store

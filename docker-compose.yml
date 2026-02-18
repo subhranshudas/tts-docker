@@ -1,0 +1,26 @@
+services:
+  tts:
+    build:
+      context: .
+    platform: linux/amd64
+    volumes:
+      - ./input:/input
+      - ./output:/output
+      - ./entrypoint.sh:/app/entrypoint.sh
+      - ./tts_google.py:/app/tts_google.py
+      - ./secrets/service-account.json:/secrets/gcp.json:ro
+    environment:
+      - INPUT_FILE=/input/input.txt
+      - OUTPUT_FILE=/output/output.wav
+      - GOOGLE_APPLICATION_CREDENTIALS=/secrets/gcp.json
+
+      # Voice controls
+      - LANGUAGE_CODE=en-US
+      - VOICE_NAME=en-US-Neural2-J
+
+      # Output format: LINEAR16 (wav) or MP3
+      - AUDIO_ENCODING=LINEAR16
+      # Optional tuning
+      - SPEAKING_RATE=1.0
+      - PITCH=0.0
+      - SAMPLE_RATE_HZ=24000

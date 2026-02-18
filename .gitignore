@@ -1,0 +1,4 @@
+# Secrets (DO NOT COMMIT)
+.secrets/
+
+.DS_Store

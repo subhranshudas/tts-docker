@@ -8,7 +8,7 @@ services:
       - ./output:/output
       - ./entrypoint.sh:/app/entrypoint.sh
       - ./tts_google.py:/app/tts_google.py
-      - ./secrets/service-account.json:/secrets/gcp.json:ro
+      - ./.secrets/service-account.json:/secrets/gcp.json:ro
     environment:
       - INPUT_FILE=/input/input.txt
       - OUTPUT_FILE=/output/output.wav
@@ -18,9 +18,19 @@ services:
       - LANGUAGE_CODE=en-US
       - VOICE_NAME=en-US-Neural2-J
 
-      # Output format: LINEAR16 (wav) or MP3
+      # Output format
       - AUDIO_ENCODING=LINEAR16
-      # Optional tuning
-      - SPEAKING_RATE=1.0
-      - PITCH=0.0
+
+      # Optional tuning (Professor style)
+      - SPEAKING_RATE=0.88
+      - PITCH=-1.0
       - SAMPLE_RATE_HZ=24000
+      - USE_SSML=true
+      - SSML_MODE=auto
+      - BREAK_MS=220
+      - PARA_BREAK_MS=420
+
+      # Google API request safety buffer
+      - MAX_SSML_BYTES=4300
+
+
